@@ -1,6 +1,8 @@
 package com.pfa.clickandcollect.web;
 
+import com.pfa.clickandcollect.Entities.Categorie;
 import com.pfa.clickandcollect.Entities.Produit;
+import com.pfa.clickandcollect.Repositories.CategorieRepository;
 import com.pfa.clickandcollect.Repositories.ProduitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,37 +12,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
-public class ProduitController {
-    private ProduitRepository produitRepository;
+public class CategorieController {
+    private CategorieRepository categorieRepository;
 
-    @GetMapping(path = "/produits")
+    @GetMapping(path = "/categories")
     public String Patients(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "6") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword)
     {
-        Page<Produit> pageproduits = produitRepository.findByNomPrdContains(keyword, PageRequest.of(page,size));
+        Page<Categorie> pagecategories = categorieRepository.findByDesignationContains(keyword, PageRequest.of(page,size));
 
-        model.addAttribute("produits", pageproduits.getContent());
-        model.addAttribute("pages", new int[pageproduits.getTotalPages()]);
+        model.addAttribute("categories", pagecategories.getContent());
+        model.addAttribute("pages", new int[pagecategories.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
-        return "produits";
+        return "categories";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/deleteCat")
     public String delete(Long id){
-        produitRepository.deleteById(id);
-        return "redirect:/produits";
+        categorieRepository.deleteById(id);
+        return "redirect:/categories";
     }
 
-    @GetMapping("/")
-    public String home(){
-        return "redirect:/produits";
-    }
+
 
 }

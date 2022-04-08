@@ -23,7 +23,7 @@ public class Produit {
     private String nomPrd;
 
     @DecimalMin("10")
-    private Double prixUt;
+    private double prixUt;
 
     @NotEmpty
     private String description;

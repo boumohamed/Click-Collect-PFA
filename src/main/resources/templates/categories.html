@@ -9,8 +9,8 @@
     <div class="container mt-3">
         <div class="card">
             <div class="card-header">
-                <h1 class="text-secondary">Liste des Produits</h1>
-                <form method="get" th:action="@{produits}" class="row justify-content-center">
+                <h1 class="text-secondary">Liste des categories</h1>
+                <form method="get" th:action="@{categories}" class="row justify-content-center">
                     <input name="keyword" type="text" class="form-control" th:value="${keyword}"  placeholder="Nom...">
                     <button type="submit" class="btn btn-outline-success m-2">Chercher</button>
                 </form>
@@ -20,31 +20,26 @@
                     <thead>
                     <tr>
                         <th> ID </th>
-                        <th> Nom </th>
-                        <th> Desc </th>
-                        <th> Prix </th>
-                        <th> categorie </th>
+                        <th> Designation </th>
+
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="p:${produits}">
-                        <td th:text="${p.id}"></td>
-                        <td th:text="${p.nomPrd}"></td>
-                        <td th:text="${p.description}"></td>
-                        <td th:text="${p.prixUt}"></td>
-                        <td th:text="${p.getCat().getDesignation()}"></td>
+                    <tr th:each="c:${categories}">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.designation}"></td>
                         <td>
-                            <a class="btn btn-outline-secondary" th:href="@{update(id=${p.id}, key=${keyword}, page=${currentPage})}">Modifier</a>
+                            <a class="btn btn-outline-secondary" th:href="@{updateCat(id=${c.id}, key=${keyword}, page=${currentPage})}">Modifier</a>
                         </td>
                         <td>
-                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${p.id})}">
+                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{deleteCat(id=${c.id})}">
                                 Delete
                             </a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-
+                
 
                 <ul class="nav nav-pills">
                     <li th:each="page, status:${pages}">

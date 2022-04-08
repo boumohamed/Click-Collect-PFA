@@ -16,36 +16,18 @@
                 </form>
             </div>
             <div class="card-body">
-                <table class="table mt-3 table-hover">
-                    <thead>
-                    <tr>
-                        <th> ID </th>
-                        <th> Nom </th>
-                        <th> Desc </th>
-                        <th> Prix </th>
-                        <th> categorie </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="p:${produits}">
-                        <td th:text="${p.id}"></td>
-                        <td th:text="${p.nomPrd}"></td>
-                        <td th:text="${p.description}"></td>
-                        <td th:text="${p.prixUt}"></td>
-                        <td th:text="${p.getCat().getDesignation()}"></td>
-                        <td>
-                            <a class="btn btn-outline-secondary" th:href="@{update(id=${p.id}, key=${keyword}, page=${currentPage})}">Modifier</a>
-                        </td>
-                        <td>
-                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${p.id})}">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-
+                <div class="row">
+                    <div th:each="p:${produits}" class="card col-6 m-3" style="width: 18rem;">
+                        <img th:if="${p.getCat().getDesignation() == 'Boisson'}" style="height: 200px" src="https://images.absolutdrinks.com/drink-images/Raw/Absolut/72e8f521-50cf-45bf-80ec-1abf3baec30a.jpg?imwidth=500" class="card-img-top" alt="...">
+                        <img th:if="${p.getCat().getDesignation() == 'Hamburger'}"  src="https://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 th:text="${p.nomPrd}" class="card-title"></h5>
+                            <p th:text="${p.description}" class="card-text"></p>
+                            <p th:text="${p.prixUt}" class="card-text"></p>
+                            <a href="#" class="btn btn-outline-info">Consulter</a>
+                        </div>
+                    </div>
+                </div>
                 <ul class="nav nav-pills">
                     <li th:each="page, status:${pages}">
                         <a th:class="${status.index==currentPage?'btn btn-secondary m-1':'btn btn-outline-secondary m-1'}"

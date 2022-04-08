@@ -19,7 +19,7 @@ public class Categorie {
     private Long id;
 
     @NotEmpty
-    private String Designation;
+    private String designation;
 
     @OneToMany(mappedBy = "cat", fetch = FetchType.LAZY)
     private Collection<Produit> produits;

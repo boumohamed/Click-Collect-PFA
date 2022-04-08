@@ -34,10 +34,12 @@
                         <td th:text="${p.prixUt}"></td>
                         <td th:text="${p.getCat().getDesignation()}"></td>
                         <td>
-                            <a class="btn btn-outline-secondary" th:href="@{update(id=${p.id}, key=${key}, page=${currentPage})}">Modifier</a>
+                            <a class="btn btn-outline-secondary" th:href="@{update(id=${p.id}, key=${keyword}, page=${currentPage})}">Modifier</a>
                         </td>
                         <td>
-                            <a onclick="return confirm('sure ?')" class="btn btn-outline-danger" th:href="@{delete(id=${p.id}, key=${key}, page=${currentPage})}">Supprimer</a>
+                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{delete(id=${p.id})}">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                     </tbody>

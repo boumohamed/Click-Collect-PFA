@@ -1,6 +1,7 @@
 package com.pfa.clickandcollect.web;
 
 import com.pfa.clickandcollect.Entities.Produit;
+import com.pfa.clickandcollect.Repositories.CategorieRepository;
 import com.pfa.clickandcollect.Repositories.ProduitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,15 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
 public class ProduitController {
     private ProduitRepository produitRepository;
+    private CategorieRepository categorieRepository;
 
     @GetMapping(path = "/produits")
-    public String Patients(Model model,
+    public String Produits(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "6") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword)
@@ -31,6 +31,17 @@ public class ProduitController {
         model.addAttribute("keyword",keyword);
         return "produits";
     }
+
+
+    @GetMapping(path = "/saveproduit")
+    public String Patients(Model model)
+    {
+
+        model.addAttribute("produit", new Produit());
+        model.addAttribute("categories", categorieRepository.findAll());
+        return "ajouterProduit";
+    }
+
 
     @GetMapping("/delete")
     public String delete(Long id){

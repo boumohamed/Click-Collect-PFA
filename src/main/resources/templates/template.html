@@ -23,7 +23,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{produits}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" th:href="@{categories}">Categories</a>
+                    <a class="nav-link" aria-current="page" th:href="@{/categories}">Categories</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
@@ -31,7 +31,7 @@
                         Produits
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" >Nouveau Produit</a></li>
+                        <li><a class="dropdown-item" th:href="@{saveproduit}">Nouveau Produit</a></li>
                         <li><a class="dropdown-item" >Chercher</a></li>
                     </ul>
                 </li>
@@ -41,7 +41,7 @@
                         Categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" >Nouvelle Categorie</a></li>
+                        <li><a class="dropdown-item" th:href="@{newCategory}">Nouvelle Categorie</a></li>
                         <li><a class="dropdown-item" >Chercher</a></li>
                     </ul>
                 </li>

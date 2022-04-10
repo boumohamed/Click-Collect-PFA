@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class ProduitController {
     private CategorieRepository categorieRepository;
 
     @GetMapping(path = "/produits")
-    public String Patients(Model model,
+    public String Produits(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "6") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword)
@@ -36,6 +35,16 @@ public class ProduitController {
         return "produits";
     }
 
+
+
+    @GetMapping(path = "/saveproduit")
+    public String ajouterProduit(Model model)
+    {
+
+        model.addAttribute("produit", new Produit());
+        model.addAttribute("categories", categorieRepository.findAll());
+        return "ajouterProduit";
+=======
     @GetMapping("/produitClients")
     public String produitClients(Model model,@RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "8") int size,
@@ -55,6 +64,7 @@ public class ProduitController {
         Produit produit = produitRepository.findById(id).orElse(null);
         model.addAttribute("produits",produit);
         return "detailproduct";
+
     }
 
 

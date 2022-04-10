@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -18,7 +19,7 @@ public class CategorieController {
     private CategorieRepository categorieRepository;
 
     @GetMapping(path = "/categories")
-    public String Patients(Model model,
+    public String listCategories(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "6") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword)
@@ -38,6 +39,17 @@ public class CategorieController {
         return "redirect:/categories";
     }
 
+    @GetMapping("/newCategory")
+    public String showCategoryNewForm(Model model){
+        model.addAttribute("category",new Categorie());
+
+        return "categorieForm";
+    }
+    @PostMapping("/saveCategory")
+    public String saveCategory(Categorie category){
+        categorieRepository.save(category);
+        return "redirect:/categories";
+    }
 
 
 }

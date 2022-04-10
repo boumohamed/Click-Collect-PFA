@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+  <title>Produit Form</title>
+</head>
+<body>
+<div layout:fragment="content1">
+  <div class="container p-3">
+    <div class="col-md-6 offset-3">
+      <h1 class="text-success m-3">Nouveau produit</h1>
+      <form th:method="post" th:action="@{save}">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nom Produit</label>
+          <input type="text" class="form-control" name="nom" id="exampleInputEmail1" th:value="${produit.nomPrd}">
+          <span th:errors="${produit.nomPrd}" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="prixUt" class="form-label">Prix Unitaire</label>
+          <input type="text" class="form-control" name="prixUt" id="prixUt" th:value="${produit.prixUt}">
+          <span th:errors="${produit.prixUt}" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+          <label for="desc" class="form-label">Description</label>
+          <textarea  class="form-control" name="description" id="desc" th:value="${produit.description}"></textarea>
+          <span th:errors="${produit.description}" class="text-danger"></span>
+        </div>
+            <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="text" class="form-control" name="image" id="image" th:value="${produit.image}">
+          <span th:errors="${produit.image}" class="text-danger"></span>
+        </div>
+            <label class="form-label">Catégorie</label>
+            <select name="categorie" class="form-control">
+              <option th:each="c:${categories}">
+                <p th:text="${c.designation}"></p>
+              </option>
+            </select>
+
+        <button type="submit" class="btn btn-success">Ajouter Produit</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

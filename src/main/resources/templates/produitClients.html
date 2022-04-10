@@ -24,7 +24,7 @@
                             <h5 th:text="${p.nomPrd}" class="card-title"></h5>
                             <p th:text="${p.description}" class="card-text"></p>
                             <p th:text="${p.prixUt}" class="card-text"></p>
-                            <a href="#" class="btn btn-outline-info">Consulter</a>
+                            <a class="btn btn-outline-info" th:href="@{detail(id=${p.id})}">Consulter</a>
                         </div>
                     </div>
                 </div>
